@@ -1,0 +1,101 @@
+/* ============================================================
+   Dicoo — animations.css
+   Centralise les animations, keyframes et micro-interactions.
+   Objectif : donner une sensation fluide sans excès.
+   ============================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Apparition progressive des éléments au scroll (voir ui.js -> IntersectionObserver) */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Décalage progressif pour les grilles de cartes */
+  .domains-grid [data-reveal],
+  .terms-grid [data-reveal] {
+    transition-delay: calc(var(--stagger, 0) * 40ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* Chargement initial du hero */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero__inner > * { animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero__inner > *:nth-child(1) { animation-delay: 0.02s; }
+.hero__inner > *:nth-child(2) { animation-delay: 0.08s; }
+.hero__inner > *:nth-child(3) { animation-delay: 0.14s; }
+.hero__inner > *:nth-child(4) { animation-delay: 0.2s; }
+.hero__inner > *:nth-child(5) { animation-delay: 0.26s; }
+
+/* Mot du jour : légère mise en avant à l'apparition */
+@keyframes wodPulseIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+.word-of-day { animation: wodPulseIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Favoris : petit "pop" du coeur au clic */
+@keyframes favPop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.35); }
+  60% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+/* Menu mobile : glissement + fondu du panneau (transform géré en CSS de base) */
+@keyframes menuItemIn {
+  from { opacity: 0; transform: translateX(14px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.mobile-menu.is-open a { animation: menuItemIn 0.35s ease both; }
+.mobile-menu.is-open a:nth-child(1) { animation-delay: 0.04s; }
+.mobile-menu.is-open a:nth-child(2) { animation-delay: 0.08s; }
+.mobile-menu.is-open a:nth-child(3) { animation-delay: 0.12s; }
+.mobile-menu.is-open a:nth-child(4) { animation-delay: 0.16s; }
+.mobile-menu.is-open a:nth-child(5) { animation-delay: 0.2s; }
+.mobile-menu.is-open a:nth-child(6) { animation-delay: 0.24s; }
+
+/* Traduction : flip léger lors de l'inversion FR/EN */
+@keyframes translationFlip {
+  0% { opacity: 0.2; transform: rotateX(8deg) translateY(4px); }
+  100% { opacity: 1; transform: rotateX(0) translateY(0); }
+}
+.flip-anim { animation: translationFlip 0.4s ease; }
+
+/* Chargement (skeleton / spinner générique, si utilisé) */
+@keyframes dicooSpin {
+  to { transform: rotate(360deg); }
+}
+.spinner-dicoo {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--border);
+  border-top-color: var(--cobalt);
+  border-radius: 50%;
+  animation: dicooSpin 0.7s linear infinite;
+}
+
+/* Suggestions : légère translation à l'ouverture (déjà gérée via opacity/transform
+   sur .suggestions-panel dans style.css, ici on ajoute un petit rebond sur les items) */
+@keyframes suggestionIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.suggestions-panel.is-open .suggestion-item { animation: suggestionIn 0.22s ease both; }
+
+/* Chip / bouton : légère impulsion au survol (complète les transitions de style.css) */
+.chip:active, .btn-dicoo:active, .btn-dicoo-outline:active { transform: scale(0.97); }

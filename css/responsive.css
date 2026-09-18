@@ -1,0 +1,85 @@
+/* ============================================================
+   Dicoo — responsive.css
+   Règles responsives. Approche mobile-first pour le contenu ;
+   ce fichier ajuste la mise en page aux points de rupture.
+   Aucun débordement horizontal ne doit apparaître, du 320px
+   au grand écran.
+   ============================================================ */
+
+/* ---- Base mobile (< 576px) déjà couverte par les styles par défaut ---- */
+
+.mobile-menu { display: block; }
+
+/* Header : sur mobile on masque la nav centrale + recherche compacte,
+   on affiche le bouton burger */
+.main-nav { display: none; }
+.header-search { display: none; }
+.menu-toggle {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.hero { padding: 2.8rem 0 3rem; text-align: left; }
+.hero-search { flex-wrap: wrap; padding: 0.6rem; }
+.hero-search input { min-width: 100%; order: 1; }
+.hero-search__icon { order: 0; }
+.hero-search > button { order: 2; width: 100%; margin-top: 0.3rem; }
+
+.term-body { grid-template-columns: 1fr; }
+.footer-grid { grid-template-columns: 1fr 1fr; }
+
+.term-header__top { flex-direction: column; align-items: stretch; }
+.fav-btn--lg { justify-content: center; }
+
+/* --------------------------- ≥ 576px (petites tablettes) --------------------------- */
+@media (min-width: 576px) {
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+}
+
+/* --------------------------- ≥ 768px (tablette) --------------------------- */
+@media (min-width: 768px) {
+  .hero { text-align: left; }
+  .hero-search { flex-wrap: nowrap; padding: 0.4rem; }
+  .hero-search input { min-width: 0; order: 0; }
+  .hero-search > button { order: 0; width: auto; margin-top: 0; }
+
+  .term-header__top { flex-direction: row; align-items: flex-start; }
+  .fav-btn--lg { justify-content: flex-start; }
+}
+
+/* --------------------------- ≥ 992px (desktop) --------------------------- */
+@media (min-width: 992px) {
+  .menu-toggle { display: none; }
+  .mobile-menu { display: none !important; }
+  .main-nav { display: flex; }
+  .header-search { display: block; }
+
+  .term-body { grid-template-columns: 1fr 300px; }
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+}
+
+/* --------------------------- ≥ 1200px (grand écran) --------------------------- */
+@media (min-width: 1200px) {
+  .domains-grid { grid-template-columns: repeat(4, 1fr); }
+  .terms-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* --------------------------- Très petits écrans (320–374px) ---------------------- */
+@media (max-width: 374px) {
+  .container-dicoo { padding: 0 1rem; }
+  .hero__title { font-size: 1.85rem; }
+  .btn-dicoo, .btn-dicoo-outline, .btn-dicoo-light { padding: 0.8rem 1.2rem; font-size: 0.92rem; }
+  .term-title { font-size: 1.6rem; }
+}
+
+/* --------------------------- Garde-fou anti-débordement -------------------------- */
+img, svg, table { max-width: 100%; }
+.container-dicoo, .hero, .term-body, .footer-grid { min-width: 0; }
