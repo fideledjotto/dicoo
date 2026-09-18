@@ -187,8 +187,9 @@ p { line-height: 1.65; color: var(--ink-soft); margin: 0 0 1em; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.9rem 0;
+  padding: 1.05rem 0;
   gap: 1.5rem;
+  min-height: 82px;
 }
 
 .brand {
@@ -197,7 +198,13 @@ p { line-height: 1.65; color: var(--ink-soft); margin: 0 0 1em; }
   gap: 0.5rem;
   font-weight: 800;
   font-size: 1.5rem;
-  color: var(--ink);
+  color:  #3452e1;;
+  flex-shrink: 0;
+}
+.brand img {
+  display: block;
+  height: 2.4rem;
+  width: auto;
   flex-shrink: 0;
 }
 .brand__dot { color: var(--amber); }
